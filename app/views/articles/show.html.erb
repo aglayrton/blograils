@@ -1,0 +1,18 @@
+<h1>Artigo</h1>
+<div>
+    <%= @article.title %>
+</div>
+<div>
+    <%= @article.description %>
+</div>
+<div>
+    <%= link_to "Editar", edit_article_path(@article) %>
+</div>
+<div>
+    <%= link_to "Deletar", article_path(@article), method: :delete, data:{
+        confirm: "Certeza que deseja deletar?",
+    } %>
+</div>
+<div>
+    <%= link_to "Voltar", articles_path() %>
+</div>

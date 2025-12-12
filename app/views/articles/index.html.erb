@@ -1,0 +1,23 @@
+<h1>Artigo</h1>
+<br>
+
+<%= render "longer_featured" %>
+
+<div class="row mb-2">
+  <%= render "medium" %>
+  <%= render "medium" %>
+</div>
+
+<div class="row g-5">
+  <div class="col-md-8">
+    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+      From the firehose
+    </h3>
+    <div>
+      <%= link_to "Criar artigo", new_article_path(), class:"btn btn-primary" %>
+    </div>
+    <%= render @articles %>
+    <%= render "pagination" %>
+  </div>
+  <%= render "right_side" %>
+</div>
