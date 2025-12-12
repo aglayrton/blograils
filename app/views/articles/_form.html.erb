@@ -1,25 +1,13 @@
 <h1>Artigo Novo</h1>
 <%# o uso do local é para que a pagina seja recarregada, pois por padrao o form_with nao é carregado no rails%>
 <%# tiramos o @ pois agora article esta no partial e ele sera um parametro%>
-<%= form_with model: article, local: true do |form| %>
+<%= simple_form_for article, local: true do |form| %>
     <div>
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-      <% article.errors.full_messages_for(:title).each do |message| %>
-        <div>
-            <%= message %>
-        </div>
-      <% end %>
+      <%= form.input :title %>
+      <%= form.input :description, input_html:{rows: 10} %>
     </div>
     <div>
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
-    <div>
-      <%= form.submit %>
-    </div>
-
-    <div>
-        <%= link_to "Voltar", articles_path() %>
+      <%= form.button :submit, class:"btn btn-primary" %>
+      <%= link_to "Voltar", articles_path(), class:"btn btn-primary"%>
     </div>
 <% end %>
