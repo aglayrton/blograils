@@ -1,11 +1,11 @@
 <h1>Artigo</h1>
 <br>
-
-<%= render "longer_featured" %>
+<%# @higth_lights[0] vai trazer o valor que está nessa key%>
+<%= render_if @high_lights[0].present?, "longer_featured", article: @high_lights[0] %>
 
 <div class="row mb-2">
-  <%= render "medium" %>
-  <%= render "medium" %>
+  <%= render_if @high_lights[1].present?,"medium", article: @high_lights[1] %>
+  <%= render_if @high_lights[2].present?, "medium", article: @high_lights[2]%>
 </div>
 
 <div class="row g-5">
