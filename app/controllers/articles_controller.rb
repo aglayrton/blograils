@@ -3,7 +3,24 @@ class ArticlesController < ApplicationController
   before_action :set_params, only:[:edit, :update, :show, :destroy] 
 
   def index
-   @articles = Article.all
+    #destaques (vou trazer os 3 ultimos como se fosse destaques)
+    @high_lights = Article.desc_order.limit(3)
+    
+
+    # se tiver um parametro chamado page vai ser usado caso nao seja sera o 1
+    #na url que vai ter o page
+    current_page = (params[:page] || 1).to_i
+
+    #Vou pegar os 3 primeiros como vetor (usando pluck) o join traz com formato string e com a virgula adicionada
+    high_lights_ids = @high_lights.pluck(:id).join(',')
+
+    
+    # paginacao dentro do page fica a quantidade de pagina
+    @articles = Article
+    .whitout_high_lights(high_lights_ids)
+    .desc_order
+    #vou buscar todos que nao sejam esses ids (do destaque)
+    .page(current_page).per(2)
   end
 
   def show
@@ -44,6 +61,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, :category_id)
   end
 end
