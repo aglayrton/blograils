@@ -1,13 +1,14 @@
-<h1>Artigo Novo</h1>
+<h1><%# article.persisted? ? "Editar" : "Criar" %></h1>
 <%# o uso do local é para que a pagina seja recarregada, pois por padrao o form_with nao é carregado no rails%>
 <%# tiramos o @ pois agora article esta no partial e ele sera um parametro%>
-<%= simple_form_for article, local: true do |form| %>
+<%= simple_form_for article, local: true do |f| %>
     <div>
-      <%= form.input :title %>
-      <%= form.input :description, input_html:{rows: 10} %>
+      <%= f.input :title %>
+      <%= f.input :description, input_html:{rows: 10} %>
+      <%= f.association :category, collection: Category.sorted %>
     </div>
     <div>
-      <%= form.button :submit, class:"btn btn-primary" %>
+      <%= f.button :submit, article.persisted? ? "Editar" : "Criar", class:"btn btn-primary" %>
       <%= link_to "Voltar", articles_path(), class:"btn btn-primary"%>
     </div>
 <% end %>
