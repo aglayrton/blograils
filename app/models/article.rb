@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  belongs_to :user
   belongs_to :category
   validates :title, presence: true
   scope :desc_order, -> {order(created_at: :desc)}
